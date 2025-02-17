@@ -38,7 +38,6 @@ RUN chown -R moo:moo /moo-rist-relay && \
 
 # Copy package files
 COPY --chown=moo:moo out_linux/ ./
-#COPY --chown=moo:moo out_linux/librist ./librist
 COPY --chown=moo:moo config.example.json ./config.json
 COPY --chown=moo:moo scripts/run_relay.sh ./
 
