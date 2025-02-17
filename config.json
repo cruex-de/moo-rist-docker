@@ -1,0 +1,7 @@
+{
+  "Settings": {
+    "StreamKey": "test",
+    "ApiKey": "7539f1472338fb084d36f99106be58de",
+    "OutputUrl": "udp://127.0.0.1:12345"
+  }
+}

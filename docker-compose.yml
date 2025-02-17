@@ -1,0 +1,15 @@
+services:
+  moo-rist-relay:
+    image: cruex-de/moo-rist-relay:latest
+    platform: "linux/amd64"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - TZ=Europe/Berlin
+    volumes:
+      - ./config.json:/moo-rist-relay/out_linux/config.json
+    ports:
+      - "12345:12345"
+      - "2030:2030"
+      - "5000:5000"
