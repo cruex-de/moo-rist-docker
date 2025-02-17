@@ -21,7 +21,9 @@ RUN apt-get update && \
         libmicrohttpd-dev \
         libmbedtls-dev \
         libmbedcrypto7t64 \
-        libicu-dev
+        libicu-dev \
+        ca-certificates && \
+    update-ca-certificates
 
 # Create non-root user
 RUN groupadd -g 1001 moo && \
@@ -31,26 +33,26 @@ RUN groupadd -g 1001 moo && \
 WORKDIR /moo-rist-relay
 
 # Create directories
-RUN mkdir -p out_linux && \
-    chown -R moo:moo out_linux && \
-    chmod 755 out_linux
+RUN chown -R moo:moo /moo-rist-relay && \
+    chmod 755 /moo-rist-relay
 
 # Copy package files
-COPY --chown=moo:moo out_linux/ ./out_linux/
-COPY --chown=moo:moo config.example.json ./out_linux/config.json
+COPY --chown=moo:moo out_linux/ ./
+#COPY --chown=moo:moo out_linux/librist ./librist
+COPY --chown=moo:moo config.example.json ./config.json
 COPY --chown=moo:moo scripts/run_relay.sh ./
 
 # Configure directories and files
-RUN chown -R moo:moo out_linux/config.json \
+RUN chown -R moo:moo config.json \
         run_relay.sh && \
     chmod 755 \
-        out_linux/config.json \
-        out_linux/moo-rist-selfhosting \
-        out_linux/librist/tools/ristreceiver \
+        config.json \
+        moo-rist-selfhosting \
+        librist/tools/ristreceiver \
         run_relay.sh
 
 # Expose ports
-EXPOSE 12345/udp 5000/tcp 2030/udp
+EXPOSE 12345 5000 2030
 
 # Start rist relay server
 ENTRYPOINT [ "sh", "run_relay.sh"]

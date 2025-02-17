@@ -8,7 +8,7 @@ services:
     environment:
       - TZ=Europe/Berlin
     volumes:
-      - ./config.json:/moo-rist-relay/out_linux/config.json
+      - ./config.json:/moo-rist-relay/config.json
     ports:
       - "12345:12345"
       - "2030:2030"
