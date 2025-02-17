@@ -51,7 +51,7 @@ RUN chown -R moo:moo config.json \
         run_relay.sh
 
 # Expose ports
-EXPOSE 12345 5000 2030
+EXPOSE 12345/udp 5000/tcp 2030/udp
 
 # Start rist relay server
 ENTRYPOINT [ "sh", "run_relay.sh"]
